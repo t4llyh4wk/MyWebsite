@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Senior Project Manager | Personal Website</title>
+  <style>
+    :root {
+      --bg: #0a0d14;
+      --bg-soft: #111624;
+      --panel: rgba(18, 24, 38, 0.72);
+      --panel-strong: rgba(24, 31, 49, 0.9);
+      --line: rgba(122, 162, 255, 0.22);
+      --text: #eef3ff;
+      --muted: #9eabc7;
+      --accent: #71a8ff;
+      --accent-2: #8a7dff;
+      --glow: rgba(113, 168, 255, 0.24);
+      --success: #7cf1cf;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --radius: 24px;
+      --max: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(138, 125, 255, 0.16), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(113, 168, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(124, 241, 207, 0.08), transparent 22%),
+        linear-gradient(180deg, #070a11 0%, #0b1020 55%, #0a0d14 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.45));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(18px);
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.84rem;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(113,168,255,0.95), rgba(138,125,255,0.95));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 30px rgba(113, 168, 255, 0.32);
+      font-size: 0.95rem;
+      color: #08111f;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      padding: 42px 0 30px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .panel,
+    .metric,
+    .timeline-item,
+    .contact-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-card {
+      padding: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      right: -110px;
+      top: -110px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(113, 168, 255, 0.24), transparent 62%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--success);
+      background: rgba(124, 241, 207, 0.08);
+      border: 1px solid rgba(124, 241, 207, 0.18);
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5.4rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      max-width: 9ch;
+    }
+
+    .subtitle {
+      margin: 22px 0 0;
+      max-width: 56ch;
+      color: var(--muted);
+      font-size: 1.07rem;
+    }
+
+    .highlight {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(113,168,255,0.12), rgba(138,125,255,0.12));
+      border: 1px solid rgba(113,168,255,0.24);
+      font-size: 1rem;
+      max-width: 560px;
+    }
+
+    .highlight strong {
+      color: #ffffff;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: 180ms ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #08111f;
+      box-shadow: 0 12px 30px var(--glow);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 20px;
+    }
+
+    .stat-card {
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 60%);
+      pointer-events: none;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .stat-copy {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .metric {
+      padding: 24px;
+    }
+
+    .metric-number {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .metric-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .metric p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .panel {
+      padding: 30px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: #d9e4ff;
+      font-size: 0.92rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .timeline-item {
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .timeline-year {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.84rem;
+      padding-top: 4px;
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .contact-card {
+      padding: 32px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      margin: 18px 0 46px;
+    }
+
+    .contact-card h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    footer {
+      padding: 0 0 36px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .two-col,
+      .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .metrics-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item,
+      .contact-card {
+        grid-template-columns: 1fr;
+        display: block;
+      }
+
+      .hero-card,
+      .panel,
+      .metric,
+      .stat-card,
+      .contact-card {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: clamp(2.4rem, 13vw, 4rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="#top" class="brand">
+        <span class="brand-mark">SP</span>
+        <span>Senior Project Manager</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#impact">Impact</a>
+        <a href="#approach">Approach</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
+      <div class="hero-card">
+        <div class="eyebrow">Strategic Delivery • Technology Leadership</div>
+        <h1>Leading projects with clarity, speed, and business focus.</h1>
+        <p class="subtitle">
+          Senior Project Manager with a technical mindset, a strong delivery rhythm, and a modern approach to stakeholder alignment, execution, and measurable outcomes.
+        </p>
+        <div class="highlight">
+          <strong>Core value:</strong> translating technical complexity into business results.
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Let’s Connect</a>
+          <a class="btn btn-secondary" href="#experience">View Experience</a>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="hero-card stat-card">
+          <div class="stat-label">What I bring</div>
+          <div class="stat-value">Execution + Strategy</div>
+          <div class="stat-copy">A delivery style that keeps teams moving while ensuring leaders understand risk, progress, and value.</div>
+        </div>
+        <div class="hero-card stat-card">
+          <div class="stat-label">Focus Areas</div>
+          <div class="stat-value">Tech Programs</div>
+          <div class="stat-copy">Infrastructure, cloud, enterprise systems, process improvement, cross-functional coordination, and operational transformation.</div>
+        </div>
+      </div>
+    </header>
+
+    <section id="impact">
+      <div class="section-head">
+        <h2>Impact that feels sharp, modern, and measurable.</h2>
+        <p>Built for organizations that need someone who can align stakeholders, manage technical workstreams, and drive outcomes without losing momentum.</p>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric">
+          <div class="metric-number">01</div>
+          <div class="metric-title">Executive Communication</div>
+          <p>Clear updates, practical reporting, and crisp decision support for leaders who need signal over noise.</p>
+        </div>
+        <div class="metric">
+          <div class="metric-number">02</div>
+          <div class="metric-title">Technical Fluency</div>
+          <p>Comfort navigating infrastructure, platforms, dependencies, and delivery risks in complex technology environments.</p>
+        </div>
+        <div class="metric">
+          <div class="metric-number">03</div>
+          <div class="metric-title">Program Discipline</div>
+          <p>Structured planning, ownership tracking, risk management, and follow-through that keeps initiatives on course.</p>
+        </div>
+        <div class="metric">
+          <div class="metric-number">04</div>
+          <div class="metric-title">Business Alignment</div>
+          <p>Projects are not just completed. They are positioned to support strategic priorities and real operational value.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="two-col">
+        <div class="panel">
+          <div class="section-head">
+            <h2>About</h2>
+          </div>
+          <p>
+            I help organizations move technical initiatives from concept to delivery with stronger structure, better communication, and a clear line of sight to business goals. My background allows me to work comfortably between engineers, stakeholders, and leadership teams.
+          </p>
+          <p>
+            That means fewer translation gaps, fewer stalled decisions, and more confidence that the work being done is tied to meaningful outcomes.
+          </p>
+        </div>
+        <div class="panel" id="approach">
+          <div class="section-head">
+            <h2>Approach</h2>
+          </div>
+          <p>
+            My style blends calm execution with modern tech sensibility: streamlined planning, strong accountability, clean reporting, and decisive prioritization.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Cross-Functional Leadership</span>
+            <span class="chip">Risk & Issue Management</span>
+            <span class="chip">Stakeholder Alignment</span>
+            <span class="chip">Roadmaps & Delivery Plans</span>
+            <span class="chip">Agile / Hybrid Execution</span>
+            <span class="chip">Business Outcome Focus</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-head">
+        <h2>Experience Snapshot</h2>
+        <p>A concise timeline designed to spotlight leadership range, technical depth, and the ability to drive initiatives forward in complex environments.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">Leadership</div>
+          <div>
+            <h3>Senior Project & Technology Delivery Focus</h3>
+            <p>Led efforts that required coordination across technical teams, stakeholders, operational constraints, and evolving priorities while keeping delivery aligned with broader organizational goals.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">Technical</div>
+          <div>
+            <h3>Infrastructure & Systems Background</h3>
+            <p>Built credibility through hands-on work in enterprise technology environments, bringing stronger judgment to project planning, sequencing, dependencies, and technical conversations.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">Business</div>
+          <div>
+            <h3>Outcome-Oriented Project Leadership</h3>
+            <p>Focused on turning technical initiatives into clear business value through stronger communication, disciplined execution, and practical decision-making support.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-card">
+        <div>
+          <h2>Ready to bring structure to high-impact work.</h2>
+          <p>
+            For organizations that need a senior project manager who can operate confidently in technical environments and communicate clearly with business leaders.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:yourname@email.com">Email Me</a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Senior Project Manager Portfolio • Designed with a modern technical edge.
+    </footer>
+  </div>
+</body>
+</html>
