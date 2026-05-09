@@ -3,612 +3,739 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Senior Project Manager | Personal Website</title>
+  <title>Kevin Moeller | Personal Website</title>
+  <meta name="description" content="Personal website for Kevin Moeller — infrastructure, cloud, and project leadership." />
   <style>
-    :root {
-      --bg: #0a0d14;
-      --bg-soft: #111624;
-      --panel: rgba(18, 24, 38, 0.72);
-      --panel-strong: rgba(24, 31, 49, 0.9);
-      --line: rgba(122, 162, 255, 0.22);
-      --text: #eef3ff;
-      --muted: #9eabc7;
-      --accent: #71a8ff;
-      --accent-2: #8a7dff;
-      --glow: rgba(113, 168, 255, 0.24);
-      --success: #7cf1cf;
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-      --radius: 24px;
-      --max: 1200px;
+    :root{
+      --bg:#0b1020;
+      --bg2:#121a30;
+      --panel:rgba(255,255,255,0.07);
+      --panel-strong:rgba(255,255,255,0.11);
+      --text:#e8edf7;
+      --muted:#aeb8cc;
+      --line:rgba(255,255,255,0.12);
+      --glow:rgba(118, 167, 255, 0.28);
+      --accent:#8fb8ff;
+      --accent2:#7af0d2;
+      --shadow:0 20px 60px rgba(0,0,0,0.35);
+      --radius:24px;
+      --radius-sm:16px;
+      --max:1180px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
+      color:var(--text);
       background:
-        radial-gradient(circle at 15% 20%, rgba(138, 125, 255, 0.16), transparent 28%),
-        radial-gradient(circle at 85% 18%, rgba(113, 168, 255, 0.18), transparent 30%),
-        radial-gradient(circle at 50% 80%, rgba(124, 241, 207, 0.08), transparent 22%),
-        linear-gradient(180deg, #070a11 0%, #0b1020 55%, #0a0d14 100%);
-      min-height: 100vh;
-      line-height: 1.6;
-      overflow-x: hidden;
+        radial-gradient(circle at 15% 20%, rgba(122,240,210,0.08), transparent 24%),
+        radial-gradient(circle at 80% 15%, rgba(143,184,255,0.18), transparent 26%),
+        radial-gradient(circle at 50% 100%, rgba(143,184,255,0.12), transparent 30%),
+        linear-gradient(160deg, #08101f 0%, #0d1326 45%, #121933 100%);
+      min-height:100vh;
+      overflow-x:hidden;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
       background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.45));
-      pointer-events: none;
-      z-index: 0;
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size:36px 36px;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
+      opacity:.55;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(calc(100% - 40px), var(--max));
+      margin:0 auto;
     }
 
-    .container {
-      width: min(calc(100% - 40px), var(--max));
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 22px 0;
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(18px);
-      z-index: 20;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.84rem;
-    }
-
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(113,168,255,0.95), rgba(138,125,255,0.95));
-      display: grid;
-      place-items: center;
-      box-shadow: 0 12px 30px rgba(113, 168, 255, 0.32);
-      font-size: 0.95rem;
-      color: #08111f;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 28px;
-      padding: 42px 0 30px;
-      align-items: stretch;
-    }
-
-    .hero-card,
-    .panel,
-    .metric,
-    .timeline-item,
-    .contact-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
       backdrop-filter: blur(16px);
+      background:rgba(7, 11, 22, 0.58);
+      border-bottom:1px solid rgba(255,255,255,0.07);
     }
 
-    .hero-card {
-      padding: 44px;
-      position: relative;
-      overflow: hidden;
+    .nav-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 0;
+      gap:20px;
     }
 
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      width: 360px;
-      height: 360px;
-      right: -110px;
-      top: -110px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(113, 168, 255, 0.24), transparent 62%);
-      pointer-events: none;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+      letter-spacing:.03em;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--success);
-      background: rgba(124, 241, 207, 0.08);
-      border: 1px solid rgba(124, 241, 207, 0.18);
-      margin-bottom: 22px;
+    .brand-mark{
+      width:40px;
+      height:40px;
+      border-radius:14px;
+      background:
+        linear-gradient(135deg, rgba(143,184,255,.9), rgba(122,240,210,.7));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18) inset,
+        0 8px 30px rgba(122,240,210,0.18);
+      position:relative;
+      overflow:hidden;
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(2.8rem, 6vw, 5.4rem);
-      line-height: 0.96;
-      letter-spacing: -0.05em;
-      max-width: 9ch;
+    .brand-mark::before,
+    .brand-mark::after{
+      content:"";
+      position:absolute;
+      background:rgba(8, 12, 24, 0.82);
+      border-radius:999px;
     }
 
-    .subtitle {
-      margin: 22px 0 0;
-      max-width: 56ch;
-      color: var(--muted);
-      font-size: 1.07rem;
+    .brand-mark::before{ inset:7px 20px 7px 7px; }
+    .brand-mark::after{ inset:7px 7px 7px 20px; opacity:.65; }
+
+    .nav-links{
+      display:flex;
+      gap:24px;
+      color:var(--muted);
+      font-size:.96rem;
     }
 
-    .highlight {
-      margin-top: 28px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(113,168,255,0.12), rgba(138,125,255,0.12));
-      border: 1px solid rgba(113,168,255,0.24);
-      font-size: 1rem;
-      max-width: 560px;
+    .nav-links a{transition:.25s ease}
+    .nav-links a:hover{color:var(--text)}
+
+    .hero{
+      padding:78px 0 34px;
+      position:relative;
     }
 
-    .highlight strong {
-      color: #ffffff;
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:30px;
+      align-items:stretch;
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 30px;
+    .glass{
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(18px);
     }
 
-    .btn {
-      padding: 13px 18px;
-      border-radius: 14px;
-      font-weight: 600;
-      border: 1px solid transparent;
-      transition: 180ms ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+    .hero-card{
+      padding:38px;
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #08111f;
-      box-shadow: 0 12px 30px var(--glow);
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      width:280px;
+      height:280px;
+      border-radius:50%;
+      background:radial-gradient(circle, var(--glow), transparent 65%);
+      top:-120px;
+      right:-80px;
+      z-index:-1;
+      filter:blur(10px);
     }
 
-    .btn-secondary {
-      border-color: var(--line);
-      color: var(--text);
-      background: rgba(255,255,255,0.03);
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      color:#dce6fb;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:.9rem;
+      letter-spacing:.02em;
+      margin-bottom:18px;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
+    .dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--accent2), var(--accent));
+      box-shadow:0 0 18px rgba(122,240,210,0.7);
     }
 
-    .hero-side {
-      display: grid;
-      gap: 20px;
+    h1{
+      margin:0;
+      font-size:clamp(2.6rem, 4.2vw, 5rem);
+      line-height:.98;
+      letter-spacing:-.045em;
     }
 
-    .stat-card {
-      padding: 26px;
-      position: relative;
-      overflow: hidden;
+    .gradient-text{
+      background:linear-gradient(120deg, #ffffff 15%, #bcd1ff 48%, #84efd5 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
     }
 
-    .stat-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 60%);
-      pointer-events: none;
+    .hero p{
+      color:var(--muted);
+      font-size:1.05rem;
+      line-height:1.75;
+      max-width:60ch;
+      margin:22px 0 0;
     }
 
-    .stat-label {
-      color: var(--muted);
-      font-size: 0.86rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
+    .cta-row{
+      margin-top:28px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
     }
 
-    .stat-value {
-      font-size: 2.1rem;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      margin-bottom: 8px;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      transition:transform .22s ease, border-color .22s ease, background .22s ease;
+      font-weight:600;
+      min-width:150px;
     }
 
-    .stat-copy {
-      color: var(--muted);
-      font-size: 0.96rem;
+    .btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,.26);
     }
 
-    section {
-      padding: 34px 0;
+    .btn-primary{
+      background:linear-gradient(135deg, rgba(143,184,255,.24), rgba(122,240,210,.18));
+      box-shadow:0 10px 30px rgba(143,184,255,.15);
     }
 
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: end;
-      margin-bottom: 18px;
+    .btn-secondary{
+      background:rgba(255,255,255,.04);
+      color:var(--text);
     }
 
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      letter-spacing: -0.04em;
+    .side-panel{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:100%;
+      position:relative;
+      overflow:hidden;
     }
 
-    .section-head p {
-      margin: 0;
-      max-width: 560px;
-      color: var(--muted);
+    .terminal{
+      background:rgba(5,8,16,0.7);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px;
+      padding:18px;
+      min-height:240px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
     }
 
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+    .terminal-top{
+      display:flex;
+      gap:8px;
+      margin-bottom:14px;
     }
 
-    .metric {
-      padding: 24px;
+    .terminal-top span{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.25);
     }
 
-    .metric-number {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      margin-bottom: 6px;
+    .code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size:.95rem;
+      line-height:1.8;
+      color:#dce7ff;
     }
 
-    .metric-title {
-      font-weight: 600;
-      margin-bottom: 8px;
+    .code .muted{ color:#88a2d8; }
+    .code .accent{ color:#95f7de; }
+    .code .soft{ color:#8fb8ff; }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:16px;
     }
 
-    .metric p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
+    .stat{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.09);
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+    .stat strong{
+      display:block;
+      font-size:1.3rem;
+      margin-bottom:4px;
     }
 
-    .panel {
-      padding: 30px;
+    .stat span{
+      color:var(--muted);
+      font-size:.92rem;
     }
 
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
+    section{
+      padding:26px 0;
     }
 
-    .chip {
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      color: #d9e4ff;
-      font-size: 0.92rem;
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:18px;
     }
 
-    .timeline {
-      display: grid;
-      gap: 16px;
-      margin-top: 16px;
+    .section-head h2{
+      margin:0;
+      font-size:clamp(1.6rem, 2vw, 2.15rem);
+      letter-spacing:-.03em;
     }
 
-    .timeline-item {
-      padding: 22px;
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 18px;
-      align-items: start;
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      max-width:58ch;
+      line-height:1.65;
     }
 
-    .timeline-year {
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.84rem;
-      padding-top: 4px;
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
     }
 
-    .timeline-item h3 {
-      margin: 0 0 8px;
-      font-size: 1.1rem;
+    .card{
+      padding:22px;
+      position:relative;
+      overflow:hidden;
     }
 
-    .timeline-item p {
-      margin: 0;
-      color: var(--muted);
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.08rem;
+      letter-spacing:-.02em;
     }
 
-    .contact-card {
-      padding: 32px;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: center;
-      margin: 18px 0 46px;
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.97rem;
     }
 
-    .contact-card h2 {
-      margin: 0 0 8px;
-      font-size: clamp(1.5rem, 3vw, 2.3rem);
-      letter-spacing: -0.04em;
+    .badge{
+      display:inline-flex;
+      font-size:.8rem;
+      padding:8px 10px;
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:999px;
+      color:#dce7ff;
+      background:rgba(255,255,255,.05);
+      margin-bottom:14px;
     }
 
-    .contact-card p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 620px;
+    .skills-wrap{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
     }
 
-    footer {
-      padding: 0 0 36px;
-      color: var(--muted);
-      font-size: 0.92rem;
+    .skill{
+      padding:12px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.09);
+      color:#dfe8fa;
+      font-size:.94rem;
     }
 
-    @media (max-width: 980px) {
-      .hero,
-      .two-col,
-      .metrics-grid {
-        grid-template-columns: 1fr 1fr;
+    .timeline{
+      display:grid;
+      gap:16px;
+    }
+
+    .timeline-item{
+      display:grid;
+      grid-template-columns:180px 1fr;
+      gap:18px;
+      padding:22px;
+      align-items:start;
+    }
+
+    .timeline-item .time{
+      color:#d8e3fb;
+      font-weight:600;
+      letter-spacing:.01em;
+    }
+
+    .timeline-item .desc h3{
+      margin:0 0 8px;
+      letter-spacing:-.02em;
+    }
+
+    .timeline-item .desc p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .contact-box{
+      padding:28px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:center;
+    }
+
+    .contact-box p{
+      color:var(--muted);
+      line-height:1.75;
+      margin:10px 0 0;
+    }
+
+    .contact-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:flex-end;
+    }
+
+    footer{
+      padding:24px 0 52px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .footer-line{
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+      margin-bottom:18px;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    @media (max-width: 1024px){
+      .hero-grid,
+      .contact-box,
+      .cards{
+        grid-template-columns:1fr;
       }
 
-      .hero {
-        grid-template-columns: 1fr;
+      .timeline-item{
+        grid-template-columns:1fr;
+      }
+
+      .contact-actions{
+        justify-content:flex-start;
       }
     }
 
-    @media (max-width: 760px) {
-      .nav {
-        flex-direction: column;
-        gap: 14px;
+    @media (max-width: 700px){
+      .nav-inner{
+        flex-direction:column;
+        align-items:flex-start;
       }
 
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .metrics-grid,
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-item,
-      .contact-card {
-        grid-template-columns: 1fr;
-        display: block;
+      .nav-links{
+        flex-wrap:wrap;
+        gap:14px;
       }
 
       .hero-card,
-      .panel,
-      .metric,
-      .stat-card,
-      .contact-card {
-        padding: 24px;
+      .side-panel,
+      .card,
+      .timeline-item,
+      .contact-box{
+        padding:20px;
       }
 
-      h1 {
-        font-size: clamp(2.4rem, 13vw, 4rem);
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .container{
+        width:min(calc(100% - 24px), var(--max));
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <nav class="nav">
-      <a href="#top" class="brand">
-        <span class="brand-mark">SP</span>
-        <span>Senior Project Manager</span>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Homepage">
+        <span class="brand-mark"></span>
+        <span>Kevin Moeller</span>
       </a>
       <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#impact">Impact</a>
-        <a href="#approach">Approach</a>
+        <a href="#focus">Focus</a>
         <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <header class="hero" id="top">
-      <div class="hero-card">
-        <div class="eyebrow">Strategic Delivery • Technology Leadership</div>
-        <h1>Leading projects with clarity, speed, and business focus.</h1>
-        <p class="subtitle">
-          Senior Project Manager with a technical mindset, a strong delivery rhythm, and a modern approach to stakeholder alignment, execution, and measurable outcomes.
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <section class="glass hero-card reveal">
+        <div class="eyebrow"><span class="dot"></span> Infrastructure • Cloud • Project Leadership</div>
+        <h1>
+          Building systems with a
+          <span class="gradient-text">sharp technical edge</span>
+          and business focus.
+        </h1>
+        <p>
+          I’m Kevin Moeller — a technology professional with a background in infrastructure,
+          enterprise systems, cloud administration, automation, and operational improvement.
+          I like creating order from complexity and making technical work feel clear, practical, and forward-moving.
         </p>
-        <div class="highlight">
-          <strong>Core value:</strong> translating technical complexity into business results.
-        </div>
-        <div class="hero-actions">
+        <div class="cta-row">
           <a class="btn btn-primary" href="#contact">Let’s Connect</a>
-          <a class="btn btn-secondary" href="#experience">View Experience</a>
+          <a class="btn btn-secondary" href="#focus">View My Focus</a>
         </div>
-      </div>
+      </section>
 
-      <div class="hero-side">
-        <div class="hero-card stat-card">
-          <div class="stat-label">What I bring</div>
-          <div class="stat-value">Execution + Strategy</div>
-          <div class="stat-copy">A delivery style that keeps teams moving while ensuring leaders understand risk, progress, and value.</div>
+      <aside class="glass side-panel reveal">
+        <div class="terminal">
+          <div class="terminal-top">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="code">
+            <div><span class="muted">$</span> whoami</div>
+            <div><span class="accent">Kevin Moeller</span></div>
+            <br/>
+            <div><span class="muted">$</span> current_focus</div>
+            <div><span class="soft">Infrastructure</span> + <span class="soft">Cloud</span> + <span class="soft">Project Delivery</span></div>
+            <br/>
+            <div><span class="muted">$</span> strengths</div>
+            <div>problem solving</div>
+            <div>cross-team communication</div>
+            <div>process improvement</div>
+            <div>technical-to-business translation</div>
+          </div>
         </div>
-        <div class="hero-card stat-card">
-          <div class="stat-label">Focus Areas</div>
-          <div class="stat-value">Tech Programs</div>
-          <div class="stat-copy">Infrastructure, cloud, enterprise systems, process improvement, cross-functional coordination, and operational transformation.</div>
-        </div>
-      </div>
-    </header>
 
-    <section id="impact">
-      <div class="section-head">
-        <h2>Impact that feels sharp, modern, and measurable.</h2>
-        <p>Built for organizations that need someone who can align stakeholders, manage technical workstreams, and drive outcomes without losing momentum.</p>
-      </div>
-      <div class="metrics-grid">
-        <div class="metric">
-          <div class="metric-number">01</div>
-          <div class="metric-title">Executive Communication</div>
-          <p>Clear updates, practical reporting, and crisp decision support for leaders who need signal over noise.</p>
+        <div class="stats">
+          <div class="stat">
+            <strong>15+</strong>
+            <span>Years in enterprise IT</span>
+          </div>
+          <div class="stat">
+            <strong>Cloud</strong>
+            <span>Infrastructure & operations</span>
+          </div>
+          <div class="stat">
+            <strong>PM Path</strong>
+            <span>Transitioning into leadership</span>
+          </div>
         </div>
-        <div class="metric">
-          <div class="metric-number">02</div>
-          <div class="metric-title">Technical Fluency</div>
-          <p>Comfort navigating infrastructure, platforms, dependencies, and delivery risks in complex technology environments.</p>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>About Me</h2>
+          </div>
+          <p>
+            I work at the intersection of technology, structure, and momentum. My background spans
+            infrastructure support, systems engineering, cloud operations, automation, and the kind of practical coordination
+            that helps technical work actually move.
+          </p>
         </div>
-        <div class="metric">
-          <div class="metric-number">03</div>
-          <div class="metric-title">Program Discipline</div>
-          <p>Structured planning, ownership tracking, risk management, and follow-through that keeps initiatives on course.</p>
-        </div>
-        <div class="metric">
-          <div class="metric-number">04</div>
-          <div class="metric-title">Business Alignment</div>
-          <p>Projects are not just completed. They are positioned to support strategic priorities and real operational value.</p>
+
+        <div class="cards">
+          <article class="glass card reveal">
+            <div class="badge">Technical Foundation</div>
+            <h3>Deep enterprise IT background</h3>
+            <p>
+              Experience across systems, infrastructure, cloud administration, support engineering,
+              and operational reliability in enterprise environments.
+            </p>
+          </article>
+
+          <article class="glass card reveal">
+            <div class="badge">Working Style</div>
+            <h3>Structured, clear, and outcomes-driven</h3>
+            <p>
+              I’m drawn to roles where communication, organization, and follow-through matter just as much
+              as technical ability.
+            </p>
+          </article>
+
+          <article class="glass card reveal">
+            <div class="badge">Career Direction</div>
+            <h3>Technical work with leadership trajectory</h3>
+            <p>
+              I’m especially interested in infrastructure, cloud, and technology initiatives where I can bridge
+              technical execution with business priorities.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="about">
-      <div class="two-col">
-        <div class="panel">
-          <div class="section-head">
-            <h2>About</h2>
+    <section id="focus">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Core Focus Areas</h2>
           </div>
           <p>
-            I help organizations move technical initiatives from concept to delivery with stronger structure, better communication, and a clear line of sight to business goals. My background allows me to work comfortably between engineers, stakeholders, and leadership teams.
-          </p>
-          <p>
-            That means fewer translation gaps, fewer stalled decisions, and more confidence that the work being done is tied to meaningful outcomes.
+            A blend of engineering credibility and delivery-minded thinking — ideal for modern infrastructure
+            teams, cloud environments, and technical project work.
           </p>
         </div>
-        <div class="panel" id="approach">
-          <div class="section-head">
-            <h2>Approach</h2>
-          </div>
-          <p>
-            My style blends calm execution with modern tech sensibility: streamlined planning, strong accountability, clean reporting, and decisive prioritization.
-          </p>
-          <div class="chip-row">
-            <span class="chip">Cross-Functional Leadership</span>
-            <span class="chip">Risk & Issue Management</span>
-            <span class="chip">Stakeholder Alignment</span>
-            <span class="chip">Roadmaps & Delivery Plans</span>
-            <span class="chip">Agile / Hybrid Execution</span>
-            <span class="chip">Business Outcome Focus</span>
+
+        <div class="glass card reveal" style="padding:24px;">
+          <div class="skills-wrap">
+            <span class="skill">Infrastructure Engineering</span>
+            <span class="skill">Cloud Administration</span>
+            <span class="skill">Automation & Scripting</span>
+            <span class="skill">Operational Improvement</span>
+            <span class="skill">Enterprise Systems Support</span>
+            <span class="skill">Technical Project Coordination</span>
+            <span class="skill">Stakeholder Communication</span>
+            <span class="skill">Process Optimization</span>
+            <span class="skill">Risk Awareness</span>
+            <span class="skill">Cross-Functional Collaboration</span>
           </div>
         </div>
       </div>
     </section>
 
     <section id="experience">
-      <div class="section-head">
-        <h2>Experience Snapshot</h2>
-        <p>A concise timeline designed to spotlight leadership range, technical depth, and the ability to drive initiatives forward in complex environments.</p>
-      </div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-year">Leadership</div>
+      <div class="container">
+        <div class="section-head reveal">
           <div>
-            <h3>Senior Project & Technology Delivery Focus</h3>
-            <p>Led efforts that required coordination across technical teams, stakeholders, operational constraints, and evolving priorities while keeping delivery aligned with broader organizational goals.</p>
+            <h2>Experience Snapshot</h2>
           </div>
+          <p>
+            A simple timeline layout that you can replace with exact employers, dates, projects,
+            certifications, or achievements later.
+          </p>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-year">Technical</div>
-          <div>
-            <h3>Infrastructure & Systems Background</h3>
-            <p>Built credibility through hands-on work in enterprise technology environments, bringing stronger judgment to project planning, sequencing, dependencies, and technical conversations.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">Business</div>
-          <div>
-            <h3>Outcome-Oriented Project Leadership</h3>
-            <p>Focused on turning technical initiatives into clear business value through stronger communication, disciplined execution, and practical decision-making support.</p>
-          </div>
+
+        <div class="timeline">
+          <article class="glass timeline-item reveal">
+            <div class="time">Recent Role</div>
+            <div class="desc">
+              <h3>Senior Applications / Systems Engineering Work</h3>
+              <p>
+                Led infrastructure improvements, supported enterprise technology environments, and built
+                solutions that improved operational efficiency and reliability.
+              </p>
+            </div>
+          </article>
+
+          <article class="glass timeline-item reveal">
+            <div class="time">Technical Strength</div>
+            <div class="desc">
+              <h3>Cloud, systems, and operations</h3>
+              <p>
+                Worked across enterprise support, platform administration, automation, and the ongoing work of keeping
+                complex environments stable, useful, and scalable.
+              </p>
+            </div>
+          </article>
+
+          <article class="glass timeline-item reveal">
+            <div class="time">Next Chapter</div>
+            <div class="desc">
+              <h3>Project-oriented technology leadership</h3>
+              <p>
+                Transitioning toward roles that combine technical fluency with project structure, coordination,
+                communication, and broader business alignment.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="contact">
-      <div class="contact-card">
-        <div>
-          <h2>Ready to bring structure to high-impact work.</h2>
-          <p>
-            For organizations that need a senior project manager who can operate confidently in technical environments and communicate clearly with business leaders.
-          </p>
-        </div>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="mailto:yourname@email.com">Email Me</a>
-          <a class="btn btn-secondary" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+      <div class="container">
+        <div class="glass contact-box reveal">
+          <div>
+            <h2 style="margin:0; font-size:clamp(1.7rem,2.2vw,2.4rem); letter-spacing:-.03em;">Ready to build something sharp?</h2>
+            <p>
+              Replace the buttons here with your real LinkedIn, email, résumé, GitHub, or portfolio links.
+              This layout is intentionally clean and easy to customize.
+            </p>
+          </div>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="mailto:you@example.com">Email Me</a>
+            <a class="btn btn-secondary" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="btn btn-secondary" href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
         </div>
       </div>
     </section>
+  </main>
 
-    <footer>
-      © 2026 Senior Project Manager Portfolio • Designed with a modern technical edge.
-    </footer>
-  </div>
+  <footer>
+    <div class="container">
+      <div class="footer-line"></div>
+      <div>© <span id="year"></span> Kevin Moeller. Designed with a modern glassmorphism + tech aesthetic.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
